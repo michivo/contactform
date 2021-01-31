@@ -1,0 +1,11 @@
+runtime: nodejs14
+instance_class: F1
+automatic_scaling:
+  max_instances: 1
+
+#env_variables:
+#  SMTP_USER: 'TODO'
+#  SMTP_HOST: 'TODO'
+#  SMTP_PASSWORD: 'TODO'
+#  REDIRECT_URL: 'TODO'
+#  RECAPTCHA_KEY: 'TODO'  

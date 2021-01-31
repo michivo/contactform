@@ -1,0 +1,61 @@
+<!doctype html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>Beispiel für ein Kontaktformular mit reCAPTCHA</title>
+
+    <!-- This is for proper scaling on mobile devices -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- We need to include the reCAPTCHA library provided by Google -->
+    <script src="https://www.google.com/recaptcha/api.js"></script>
+
+    <!-- let's use Bootstrap, so our form looks a bit nicer -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
+</head>
+
+<body>
+    <main class="container">
+        <h1>Kontaktformular</h1>
+        <p>Dieses Kontakformular schickt eine E-Mail an eine im Backend angegebene Adresse. Um Missbrauch vorzubeugen,
+            verwenden wir Googles reCAPTCHA.</p>
+        <!-- you need to enter the URL of your server here! -->
+        <form action="http://localhost:8080/sendmailrecaptcha" method="POST" id="contact-form">
+            <div class="mb-3">
+                <label for="nameInput" class="form-label">Name</label>
+                <input type="text" class="form-control" id="nameInput" name="username">
+            </div>
+            <div class="mb-3">
+                <label for="mailInput" class="form-label">E-Mail-Adresse</label>
+                <input type="email" class="form-control" id="mailInput" placeholder="name@example.com" name="mail">
+            </div>
+            <div class="mb-3">
+                <label for="titleInput" class="form-label">Betreff</label>
+                <input type="text" class="form-control" id="titleInput" name="title">
+            </div>
+            <div class="mb-3">
+                <label for="messageInput" class="form-label">Nachricht</label>
+                <textarea class="form-control" id="messageInput" rows="5" name="message"></textarea>
+            </div>
+
+            <!-- The data & class attributes are there for reCAPTCHA -->
+            <button type="button" class="g-recaptcha btn btn-primary" data-sitekey="TODO - provide your site key here!" data-callback='onSubmit'
+                data-action='submit'>Abschicken</button>
+
+        </form>
+    </main>
+
+    <script>
+        /*
+         * We need this little JS-Snippet for our Google Captcha (see https://developers.google.com/recaptcha/docs/v3)
+         */
+        function onSubmit(token) {
+            document.getElementById("contact-form").submit();
+        }
+    </script>
+
+</body>
+
+</html>
